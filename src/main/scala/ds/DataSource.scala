@@ -130,6 +130,7 @@ class DataSource(val dbRef: String) extends JsaDataSource {
 }
 
 object TestDS {
+  case class Res(id: Option[Int], name: String)
   def main(args: Array[String]): Unit = {
     //    println(getByValue(User(Option(1), "aa", 20)))
     //    println(getOneByValue(User(Option(1), "aax", 20)))
@@ -146,9 +147,12 @@ object TestDS {
     println(user1)
     println("--------4")
     val id: Option[Int] = Some(1)
-    println(ds.getOneByValue(vo[User]('id ->> id, 'age ->> user1.map(_.age).getOrElse(26))).as[User])
+    println(ds.getOneByValue(vo[User]('id ->> Option(1), 'age ->> 26)).as[User])
     println("--------3")
     println(ds.getOneByValue3('id ->> Option(1)).as[User])
+
+    val data = ds.getOneByValue(vo[User]('id ->> Option(1), 'age ->> 26)).as[Res]
+    println(data)
   }
 }
 
