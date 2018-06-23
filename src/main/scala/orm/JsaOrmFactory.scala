@@ -3,7 +3,7 @@ package orm
 /**
   * Created by Admin on 2017/4/25.
   */
-object JsaOrmFactory {
+object DBFactory {
   lazy val sqlExecutorMap: Map[String, SqlExecutorAdapter] = Map(
     DefaultSqlAdapter.dbRef -> DefaultSqlAdapter
   )

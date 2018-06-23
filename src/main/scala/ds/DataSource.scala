@@ -6,7 +6,7 @@ import java.sql.PreparedStatement
 
 import macrot.GetTypeName
 import macrot.RecordSyntax.Record
-import orm.JsaOrmFactory
+import orm.DBFactory
 import shapeless.{::, Generic, HList, HNil, LabelledGeneric, Witness}
 import shapeless.labelled.FieldType
 import shapeless.ops.hlist.{LeftFolder, Mapper, ToTraversable}
@@ -20,7 +20,7 @@ import scala.annotation.switch
   */
 trait JsaDataSource {
   val dbRef: String
-  val executor: SqlExecutor = JsaOrmFactory.getSqlExecutorAdapter(dbRef).sqlExecutor
+  val executor: SqlExecutor = DBFactory.getSqlExecutorAdapter(dbRef).sqlExecutor
 }
 class DataSource(val dbRef: String) extends JsaDataSource {
 
@@ -141,7 +141,7 @@ object TestDS {
     //
     //    def f2[T <: HList](lab: T)(implicit param: Parameters[T]) = param
     //    println(f2(param))
-    val ds = JsaOrmFactory.getSqlExecutorAdapter("druid").dataSource
+    val ds = DBFactory.getSqlExecutorAdapter("druid").dataSource
 
     val user1 = ds.getOneByValue2(('id ->> Option(1), 'age ->> 26)).as[User]
     println(user1)

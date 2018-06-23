@@ -28,7 +28,7 @@ object TestDS {
     import macrot.RecordSyntax.key._
     import macrot.RecordSyntax.vo
 
-    val ds = JsaOrmFactory.getSqlExecutorAdapter("druid").dataSource
+    val ds = DBFactory.getSqlExecutorAdapter("druid").dataSource
 
     val user: Option[User] = ds.getOneByValue(vo[User]('id ->> Option(1), 'age ->> 26)).as[User]
     println(user)

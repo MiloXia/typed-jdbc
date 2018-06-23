@@ -5,7 +5,7 @@ import javax.sql.DataSource
 import dbtype.{ByteType, IntType, UnknownType, Varchar}
 import ds.ManipulationResult
 import java.sql.{PreparedStatement, ResultSet}
-import orm.JsaOrmFactory
+import orm.DBFactory
 import parameter.Parameter
 import shapeless.labelled.FieldType
 import shapeless.{::, Generic, HList, HNil, LabelledGeneric, Poly1, Poly2}
@@ -18,7 +18,7 @@ import statement.{Parameters, Statement}
 trait SqlExecutor {
   import SqlExecutor._
   val poolName: String
-  val dataSource: DataSource = JsaOrmFactory.getSqlExecutorAdapter(poolName).pool.dataSource
+  val dataSource: DataSource = DBFactory.getSqlExecutorAdapter(poolName).pool.dataSource
   def getConnection =
     try dataSource.getConnection()
     catch {
